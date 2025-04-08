@@ -252,7 +252,7 @@ def get_image_classifier(classifier_name):
 
     return wrapper_resnet
 
-def load_custom_image(image_path, image_size=256):
+def load_custom_image(image_path, base_size=224):
 
     transform = transforms.Compose([
                 transforms.Resize(base_size),
