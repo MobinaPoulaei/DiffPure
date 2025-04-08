@@ -229,7 +229,7 @@ def robustness_eval(args, config):
     model = model.eval().to(config.device)
 
     # load data
-    x_val, y_val = load_data(args, adv_batch_size)
+    x_val, y_val = load_custom_image("/kaggle/working/sample_image/sample_image.jpg") 
 
     # eval classifier and sde_adv against attacks
     if args.attack_version in ['standard', 'rand', 'custom']:
