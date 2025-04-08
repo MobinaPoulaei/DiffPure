@@ -254,7 +254,7 @@ def get_image_classifier(classifier_name):
 
 def load_custom_image(image_path, image_size=256):
 
-    transforms = transforms.Compose([
+    transform = transforms.Compose([
                 transforms.Resize(base_size),
                 # no horizontal flip for standard validation
                 transforms.ToTensor(),
