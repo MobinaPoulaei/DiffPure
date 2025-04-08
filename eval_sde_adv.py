@@ -22,7 +22,7 @@ from autoattack import AutoAttack
 from stadv_eot.attacks import StAdvAttack
 
 import utils
-from utils import str2bool, get_accuracy, get_image_classifier, load_data
+from utils import str2bool, get_accuracy, get_image_classifier, load_custom_image
 
 from runners.diffpure_ddpm import Diffusion
 from runners.diffpure_guided import GuidedDiffusion
