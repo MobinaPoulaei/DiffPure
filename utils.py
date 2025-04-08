@@ -8,7 +8,7 @@
 import sys
 import argparse
 from typing import Any
-
+from PIL import Image
 import torch
 import torch.nn as nn
 import torchvision.models as models
