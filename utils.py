@@ -14,7 +14,7 @@ import torch.nn as nn
 import torchvision.models as models
 from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
-
+import numpy as np
 from robustbench import load_model
 import data
 
@@ -252,7 +252,7 @@ def get_image_classifier(classifier_name):
 
     return wrapper_resnet
 
-def load_custom_image(image_paths, base_size=224):
+def load_custom_image(image_paths, label_file, base_size=224):
     transform = transforms.Compose([
         transforms.Resize(base_size),
         transforms.ToTensor(),
@@ -265,10 +265,9 @@ def load_custom_image(image_paths, base_size=224):
         img = Image.open(image_path).convert('RGB')
         x = transform(img)
         x_list.append(x)
-        y_list.append(0)  # Dummy label
 
     x_tensor = torch.stack(x_list)
-    y_tensor = torch.tensor(y_list)
+    y_tensor = torch.tensor(label_file)
 
     return x_tensor, y_tensor
 
@@ -276,10 +275,12 @@ def load_data(args, adv_batch_size):
     if 'imagenet' in args.domain:
         # Custom image paths (replace this with your actual image paths)
         image_folder = '/kaggle/working/sample_image'
+        label_folder = '/kaggle/working/gt-new'
+        label_file = np.load(label_folder)[:816]
         image_paths = [os.path.join(image_folder, f) for f in os.listdir(image_folder) if f.endswith('.jpg')]
 
         # Load images
-        x_val, y_val = load_custom_image(image_paths, base_size=224)
+        x_val, y_val = load_custom_image(image_paths, label_file, base_size=224)
 
         # Create DataLoader from tensors
         dataset = TensorDataset(x_val, y_val)
