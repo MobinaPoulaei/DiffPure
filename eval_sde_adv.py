@@ -114,7 +114,7 @@ def eval_autoattack(args, config, model, x_val, y_val, adv_batch_size, log_dir):
     print(f'apply the attack to classifier [{args.lp_norm}]...')
     classifier = get_image_classifier(args.classifier_name).to(config.device)
     adversary_resnet = AutoAttack(classifier, norm=args.lp_norm, eps=args.adv_eps,
-                                  version=attack_version,
+                                  version=attack_version, attacks_to_run=[],
                                   log_path=f'{log_dir}/log_resnet.txt', device=config.device)
     if attack_version == 'custom':
         adversary_resnet.apgd.n_restarts = 1
