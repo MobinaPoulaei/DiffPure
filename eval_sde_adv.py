@@ -271,7 +271,7 @@ def parse_args_and_config():
     parser.add_argument('--domain', type=str, default='celebahq', help='which domain: celebahq, cat, car, imagenet')
     parser.add_argument('--classifier_name', type=str, default='Eyeglasses', help='which classifier to use')
     parser.add_argument('--partition', type=str, default='val')
-    parser.add_argument('--adv_batch_size', type=int, default=64)
+    parser.add_argument('--adv_batch_size', type=int, default=1)
     parser.add_argument('--attack_type', type=str, default='square')
     parser.add_argument('--lp_norm', type=str, default='Linf', choices=['Linf', 'L2'])
     parser.add_argument('--attack_version', type=str, default='custom')
