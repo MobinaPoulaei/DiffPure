@@ -275,12 +275,12 @@ def load_data(args, adv_batch_size):
     if 'imagenet' in args.domain:
         # Custom image paths (replace this with your actual image paths)
         image_folder = '/kaggle/working/sample_image'
-        label_folder = '/kaggle/working/gt-new'
-        label_file = np.load(label_folder)[:816]
+        label_file = '/kaggle/working/gt-new/gt_new.npy'
+        label_array = np.load(label_folder)[:816]
         image_paths = [os.path.join(image_folder, f) for f in os.listdir(image_folder) if f.endswith('.jpg')]
 
         # Load images
-        x_val, y_val = load_custom_image(image_paths, label_file, base_size=224)
+        x_val, y_val = load_custom_image(image_paths, label_array, base_size=224)
 
         # Create DataLoader from tensors
         dataset = TensorDataset(x_val, y_val)
