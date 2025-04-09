@@ -252,19 +252,41 @@ def get_image_classifier(classifier_name):
 
     return wrapper_resnet
 
-def load_custom_image(image_path, base_size=224):
-
+def load_custom_image(image_paths, base_size=224):
     transform = transforms.Compose([
-                transforms.Resize(base_size),
-                # no horizontal flip for standard validation
-                transforms.ToTensor(),
-                # transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
-            ])
+        transforms.Resize(base_size),
+        transforms.ToTensor(),
+    ])
 
-    img = Image.open(image_path).convert('RGB')
-    x = transform(img).unsqueeze(0)  # Add batch dim
-    y = torch.tensor([0])  # Dummy label
-    return x, y
+    x_list = []
+    y_list = []
+    
+    for image_path in image_paths:
+        img = Image.open(image_path).convert('RGB')
+        x = transform(img)
+        x_list.append(x)
+        y_list.append(0)  # Dummy label
+
+    x_tensor = torch.stack(x_list)
+    y_tensor = torch.tensor(y_list)
+
+    return x_tensor, y_tensor
+
+def load_data(args, adv_batch_size):
+    if 'imagenet' in args.domain:
+        # Custom image paths (replace this with your actual image paths)
+        image_folder = '/kaggle/working/sample_image'
+        image_paths = [os.path.join(image_folder, f) for f in os.listdir(image_folder) if f.endswith('.jpg')]
+
+        # Load images
+        x_val, y_val = load_custom_image(image_paths, base_size=224)
+
+        # Create DataLoader from tensors
+        dataset = TensorDataset(x_val, y_val)
+        val_loader = DataLoader(dataset, batch_size=adv_batch_size, shuffle=False)
+        x_val, y_val = next(iter(loader))
+    x_val, y_val = x_val.contiguous().requires_grad_(True), y_val.contiguous()
+    return x_val, y_val
     
 # def load_data(args, adv_batch_size):
 #     if 'imagenet' in args.domain:
