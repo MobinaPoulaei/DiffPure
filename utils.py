@@ -276,7 +276,7 @@ def load_data(args, adv_batch_size):
         # Custom image paths (replace this with your actual image paths)
         image_folder = '/kaggle/working/sample_image'
         label_file = '/kaggle/working/gt-new/gt_new.npy'
-        label_array = np.load(label_folder)[:816]
+        label_array = np.load(label_file)[:816]
         image_paths = [os.path.join(image_folder, f) for f in os.listdir(image_folder) if f.endswith('.jpg')]
 
         # Load images
