@@ -13,7 +13,7 @@ for t in 150; do
           -i imagenet-robust_adv-$t-eps$adv_eps-4x4-bm0-t0-end1e-5-cont-eot20 \
           --t $t \
           --adv_eps $adv_eps \
-          --adv_batch_size 4 \
+          --adv_batch_size 1 \
           --num_sub 16 \
           --domain imagenet \
           --classifier_name imagenet-resnet50 \
