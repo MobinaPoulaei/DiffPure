@@ -285,7 +285,7 @@ def load_data(args, adv_batch_size):
         # Create DataLoader from tensors
         dataset = TensorDataset(x_val, y_val)
         val_loader = DataLoader(dataset, batch_size=adv_batch_size, shuffle=False)
-        x_val, y_val = next(iter(loader))
+        x_val, y_val = next(iter(val_loader))
     x_val, y_val = x_val.contiguous().requires_grad_(True), y_val.contiguous()
     return x_val, y_val
     
