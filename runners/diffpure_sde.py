@@ -159,7 +159,7 @@ class RevGuidedDiffusion(torch.nn.Module):
         # load model
         if config.data.dataset == 'ImageNet':
             img_shape = (3, 256, 256)
-            model_dir = '/kaggle/working/pretrained/guided_diffusion'
+            model_dir = './pretrained/guided_diffusion'
             model_config = model_and_diffusion_defaults()
             model_config.update(vars(self.config.model))
             print(f'model_config: {model_config}')
