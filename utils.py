@@ -274,8 +274,8 @@ def load_custom_image(image_paths, label_file, base_size=224):
 def load_data(args, adv_batch_size):
     if 'imagenet' in args.domain:
         # Custom image paths (replace this with your actual image paths)
-        image_folder = './sample_image'
-        label_file = './gt-new/gt_new.npy'
+        image_folder = '../sample_image'
+        label_file = '../gt-new/gt_new.npy'
         label_array = np.load(label_file)
         image_paths = [os.path.join(image_folder, f) for f in os.listdir(image_folder) if f.endswith('.jpg')]
 
